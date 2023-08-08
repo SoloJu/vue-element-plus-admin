@@ -20,44 +20,44 @@ const { getStorage } = useStorage()
 
 // 根据浏览器当前主题设置系统主题色
 const setDefaultTheme = () => {
-  if (getStorage('isDark') !== null) {
-    appStore.setIsDark(getStorage('isDark'))
-    return
-  }
-  const isDarkTheme = isDark()
-  appStore.setIsDark(isDarkTheme)
+    if (getStorage('isDark') !== null) {
+        appStore.setIsDark(getStorage('isDark'))
+        return
+    }
+    const isDarkTheme = isDark()
+    appStore.setIsDark(isDarkTheme)
 }
 
 setDefaultTheme()
 </script>
 
 <template>
-  <ConfigGlobal :size="currentSize">
-    <RouterView :class="greyMode ? `${prefixCls}-grey-mode` : ''" />
-  </ConfigGlobal>
+    <ConfigGlobal :size="currentSize">
+        <RouterView :class="greyMode ? `${prefixCls}-grey-mode` : ''" />
+    </ConfigGlobal>
 </template>
 
 <style lang="less">
 @prefix-cls: ~'@{namespace}-app';
 
 .size {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 html,
 body {
-  padding: 0 !important;
-  margin: 0;
-  overflow: hidden;
-  .size;
-
-  #app {
+    padding: 0 !important;
+    margin: 0;
+    overflow: hidden;
     .size;
-  }
+
+    #app {
+        .size;
+    }
 }
 
 .@{prefix-cls}-grey-mode {
-  filter: grayscale(100%);
+    filter: grayscale(100%);
 }
 </style>

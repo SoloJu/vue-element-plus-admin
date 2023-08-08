@@ -193,8 +193,8 @@
 </script>
 
 <template>
-  <ContentWrap>
-    <!-- <Search :schema="allSchemas.searchSchema" @search="setSearchParams" @reset="setSearchParams" />
+    <ContentWrap>
+        <!-- <Search :schema="allSchemas.searchSchema" @search="setSearchParams" @reset="setSearchParams" />
 
     <div class="mb-10px">
       <ElButton :loading="delLoading" type="danger" @click="delData(null, true)">
@@ -219,5 +219,5 @@
         </ElButton>
       </template>
     </Table> -->
-  </ContentWrap>
+    </ContentWrap>
 </template>

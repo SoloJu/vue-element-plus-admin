@@ -10,10 +10,10 @@ import { IDomEditor } from '@wangeditor/editor'
 const { required } = useValidator()
 
 const props = defineProps({
-  currentRow: {
-    type: Object as PropType<Nullable<TableData>>,
-    default: () => null
-  }
+    currentRow: {
+        type: Object as PropType<Nullable<TableData>>,
+        default: () => null
+    }
 })
 
 const { t } = useI18n()
@@ -22,133 +22,133 @@ const { formRegister, formMethods } = useForm()
 const { setValues, getFormData, getElFormExpose, setSchema } = formMethods
 
 const schema = reactive<FormSchema[]>([
-  {
-    field: 'title',
-    label: t('exampleDemo.title'),
-    component: 'Input',
-    formItemProps: {
-      rules: [required()]
-    },
-    colProps: {
-      span: 24
-    }
-  },
-  {
-    field: 'author',
-    label: t('exampleDemo.author'),
-    component: 'Input',
-    formItemProps: {
-      rules: [required()]
-    }
-  },
-  {
-    field: 'display_time',
-    label: t('exampleDemo.displayTime'),
-    component: 'DatePicker',
-    componentProps: {
-      type: 'datetime',
-      valueFormat: 'YYYY-MM-DD HH:mm:ss'
-    },
-    formItemProps: {
-      rules: [required()]
-    }
-  },
-  {
-    field: 'importance',
-    label: t('exampleDemo.importance'),
-    component: 'Select',
-    formItemProps: {
-      rules: [required()]
-    },
-    componentProps: {
-      options: [
-        {
-          label: '重要',
-          value: 3
+    {
+        field: 'title',
+        label: t('exampleDemo.title'),
+        component: 'Input',
+        formItemProps: {
+            rules: [required()]
         },
-        {
-          label: '良好',
-          value: 2
-        },
-        {
-          label: '一般',
-          value: 1
+        colProps: {
+            span: 24
         }
-      ]
-    }
-  },
-  {
-    field: 'pageviews',
-    label: t('exampleDemo.pageviews'),
-    component: 'InputNumber',
-    value: 0,
-    formItemProps: {
-      rules: [required()]
-    }
-  },
-  {
-    field: 'content',
-    component: 'Editor',
-    colProps: {
-      span: 24
     },
-    componentProps: {
-      defaultHtml: '',
-      // @ts-ignore
-      onChange: (edit: IDomEditor) => {
-        setValues({
-          content: edit.getHtml()
-        })
-      }
+    {
+        field: 'author',
+        label: t('exampleDemo.author'),
+        component: 'Input',
+        formItemProps: {
+            rules: [required()]
+        }
     },
-    label: t('exampleDemo.content')
-  }
+    {
+        field: 'display_time',
+        label: t('exampleDemo.displayTime'),
+        component: 'DatePicker',
+        componentProps: {
+            type: 'datetime',
+            valueFormat: 'YYYY-MM-DD HH:mm:ss'
+        },
+        formItemProps: {
+            rules: [required()]
+        }
+    },
+    {
+        field: 'importance',
+        label: t('exampleDemo.importance'),
+        component: 'Select',
+        formItemProps: {
+            rules: [required()]
+        },
+        componentProps: {
+            options: [
+                {
+                    label: '重要',
+                    value: 3
+                },
+                {
+                    label: '良好',
+                    value: 2
+                },
+                {
+                    label: '一般',
+                    value: 1
+                }
+            ]
+        }
+    },
+    {
+        field: 'pageviews',
+        label: t('exampleDemo.pageviews'),
+        component: 'InputNumber',
+        value: 0,
+        formItemProps: {
+            rules: [required()]
+        }
+    },
+    {
+        field: 'content',
+        component: 'Editor',
+        colProps: {
+            span: 24
+        },
+        componentProps: {
+            defaultHtml: '',
+            // @ts-ignore
+            onChange: (edit: IDomEditor) => {
+                setValues({
+                    content: edit.getHtml()
+                })
+            }
+        },
+        label: t('exampleDemo.content')
+    }
 ])
 
 const rules = reactive({
-  title: [required()],
-  author: [required()],
-  importance: [required()],
-  pageviews: [required()],
-  display_time: [required()],
-  content: [required()]
+    title: [required()],
+    author: [required()],
+    importance: [required()],
+    pageviews: [required()],
+    display_time: [required()],
+    content: [required()]
 })
 
 const submit = async () => {
-  const elForm = await getElFormExpose()
-  const valid = await elForm?.validate().catch((err) => {
-    console.log(err)
-  })
-  if (valid) {
-    const formData = await getFormData()
-    return formData
-  }
+    const elForm = await getElFormExpose()
+    const valid = await elForm?.validate().catch((err) => {
+        console.log(err)
+    })
+    if (valid) {
+        const formData = await getFormData()
+        return formData
+    }
 }
 
 watch(
-  () => props.currentRow,
-  (currentRow) => {
-    if (!currentRow) return
-    setValues(currentRow)
-    setSchema([
-      {
-        field: 'content',
-        path: 'componentProps.defaultHtml',
-        value: currentRow.content
-      }
-    ])
-  },
-  {
-    deep: true,
-    immediate: true
-  }
+    () => props.currentRow,
+    (currentRow) => {
+        if (!currentRow) return
+        setValues(currentRow)
+        setSchema([
+            {
+                field: 'content',
+                path: 'componentProps.defaultHtml',
+                value: currentRow.content
+            }
+        ])
+    },
+    {
+        deep: true,
+        immediate: true
+    }
 )
 
 defineExpose({
-  submit
+    submit
 })
 </script>
 
 <template>
-  <Form :rules="rules" @register="formRegister" :schema="schema" />
+    <Form :rules="rules" @register="formRegister" :schema="schema" />
 </template>
